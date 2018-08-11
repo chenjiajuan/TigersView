@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TigerView</string>
+    <string name="title_activity_scroller">ScrollerActivity</string>
+</resources>
