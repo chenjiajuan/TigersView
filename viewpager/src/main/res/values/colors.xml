@@ -2,8 +2,5 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorfa733a">#fa733a</color>
-    <color name="colorf7d3afa">#7d3afa</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="province_line_border">#C7C7C7</color>
 </resources>
