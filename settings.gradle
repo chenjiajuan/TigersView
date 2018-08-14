@@ -1,1 +1,1 @@
-include ':app', ':viewpager', ':popwindow'
+include ':app', ':viewpager', ':popwindow', ':tigerview', ':tiger'
