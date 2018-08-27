@@ -18,6 +18,7 @@ public class MyScroller  {
     private float currX; //每次移动一小段后X的坐标
 
     public MyScroller(Context context){
+
     }
     public void startScroll(float startX, float startY, int dx, int dy, int distanceTime) {
         this.startX=startX;

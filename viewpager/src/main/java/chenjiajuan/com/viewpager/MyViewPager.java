@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class MyViewPager extends ViewGroup {
     private static final String TAG="MyViewPager";
-    private ArrayList<ImageView> viewArrayList=new ArrayList<>();
     private GestureDetector gestureDetector;
     private MyScroller myScroller; //滑动辅助器，让滑动平滑
 
@@ -34,11 +33,7 @@ public class MyViewPager extends ViewGroup {
         myScroller=new MyScroller(context);
 
     }
-    public void setImageView(ArrayList<ImageView> views){
-        Log.e(TAG,"setImageView.....");
-        this.viewArrayList.addAll(views);
 
-    }
     //自定义view必须写改方法
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -70,7 +65,6 @@ public class MyViewPager extends ViewGroup {
         int modeHeight=MeasureSpec.getMode(heightMeasureSpec);
         Log.e(TAG,"onMeasure , parentWidth : "+parentWidth+" , parentHeight : "+
                 parentHeight+" modeWidth : "+modeWidth+",modeHeight :"+modeHeight);
-        //onMeasure , parentWidth : 788 , parentHeight : 394 modeWidth : 1073741824,modeHeight :1073741824
         for (int i=0;i<getChildCount();i++){
             View view=getChildAt(i);
             LayoutParams params1=view.getLayoutParams();
@@ -97,7 +91,7 @@ public class MyViewPager extends ViewGroup {
     /**
      * 1.将事件传递给手势识别器,
      * 2.记录按下的位置，移动的偏移量，（中间偏移量，手势识别器在做移动）手指抬起时是否需要切换
-     *      (1)getX和getRawX的区别？
+     *      (1)getX和getRawX的区别？ view在其父view中的坐标，view在屏幕中的坐标
      *      (2)tempIndex; //临时变量，计算下一个页面，可能越界，计算出值后，需要处理，再滑动
      * @param event
      * @return
@@ -146,16 +140,17 @@ public class MyViewPager extends ViewGroup {
 
     private  void scrollToPager(int tempIndex){
         if (tempIndex<0){
-            tempIndex=0;
+            tempIndex=getChildCount()-1;
         }
         if (tempIndex>getChildCount()-1){
-            tempIndex=getChildCount()-1;
+            tempIndex=0;
         }
         currentIndex=tempIndex;
         if (onPageChangeListener!=null){
             onPageChangeListener.onScrollToPager(currentIndex);
         }
         int distanceX=currentIndex*getWidth()-getScrollX();
+        Log.e(TAG,"tempIndex : "+tempIndex+" , distanceX : "+distanceX+  "getScrollX ： "+getScrollX()+",getScrollY :"+getScrollY());
         //这里其实没有任何移动，只是将一些坐标记录下来
         myScroller.startScroll(getScrollX(),getScrollY(),distanceX,0,distanceTime);
 //        scrollTo(currentIndex*getWidth(),0);
@@ -209,6 +204,9 @@ public class MyViewPager extends ViewGroup {
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             Log.e(TAG,"gestureDetector,onScroll distanceX : "+(int)distanceX+",distanceY : "+(int)distanceY);
             Log.e(TAG,"before scroll X: "+getScaleX()+" , Y : "+getScaleY());
+            if (currentIndex==0||currentIndex==(getChildCount()-1)){
+                return true;
+            }
             scrollBy((int) distanceX,0);
             Log.e(TAG,"after  scroll X: "+getScaleX()+" , Y : "+getScaleY());
             return true;

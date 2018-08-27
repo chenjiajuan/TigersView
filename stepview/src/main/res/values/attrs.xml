@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StepView">
+      <attr name="iconWidth" format="dimension"/>
+      <attr name="iconHeight" format="dimension"/>
+      <attr name="leftPadding" format="dimension"/>
+      <attr name="textTopPadding" format="dimension"/>
+      <attr name="lineHeight" format="dimension"/>
+      <attr name="lineWidth" format="dimension"/>
+      <attr name="textSize" format="dimension"/>
+      <attr name="completeColor" format="color"/>
+      <attr name="unCompleteColor" format="color"/>
+      <attr name="currentColor" format="color"/>
+      <attr name="iconComplete" format="reference"/>
+      <attr name="iconUnComplete" format="reference"/>
+      <attr name="iconCurrent" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -29,7 +29,6 @@ public class MainActivity extends Activity {
             viewArrayList.add(imageView);
             viewPager.addView(imageView);
         }
-        viewPager.setImageView(viewArrayList);
         viewPager.setOnPageChangeListener(new MyViewPager.OnPageChangeListener() {
             @Override
             public void onScrollToPager(int position) {
